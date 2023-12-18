@@ -1,0 +1,13 @@
+res://lighting.tscn
+res://Main.tres
+res://bulb.gd
+res://Main.tscn
+res://player.tscn
+res://lightSensor.gd
+res://powerSource.gd
+res://Simulation.gd
+res://Server.gd
+res://Sprite3D.gd
+res://simulation.tscn
+res://test.tscn
+res://movement_sensor.gd

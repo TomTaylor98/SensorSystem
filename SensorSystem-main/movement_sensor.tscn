@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://ofwngflr2pv8"]
+
+[node name="movementSensor" type="Node3D"]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]

@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://cumiidyf6368c"]
+
+[ext_resource type="PackedScene" uid="uid://ofwngflr2pv8" path="res://movement_sensor.tscn" id="1_gpig8"]
+[ext_resource type="PackedScene" uid="uid://d32khhuok8616" path="res://player.tscn" id="2_qfn6j"]
+[ext_resource type="PackedScene" uid="uid://0y7w84i8m48p" path="res://lighting.tscn" id="3_howj5"]
+[ext_resource type="Script" path="res://movement_sensor.gd" id="4_5c52w"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_70e1h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tslyj"]
+albedo_color = Color(0.305882, 0.309804, 0.121569, 1)
+
+[node name="Test" type="Node3D"]
+
+[node name="ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+mesh = SubResource("PlaneMesh_70e1h")
+surface_material_override/0 = SubResource("StandardMaterial3D_tslyj")
+
+[node name="player" parent="." instance=ExtResource("2_qfn6j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.349664, 0)
+
+[node name="lighting" parent="." instance=ExtResource("3_howj5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.220745, -0.000975132)
+
+[node name="movementSensor" parent="lighting" instance=ExtResource("1_gpig8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.000975132)
+script = ExtResource("4_5c52w")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.827326, 0.561723, 0, -0.561723, 0.827326, -0.149171, 1.35899, 4.28133)
+sky_mode = 1

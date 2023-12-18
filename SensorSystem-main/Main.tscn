@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://cc1h5qrapbxuv"]
+
+[ext_resource type="PackedScene" uid="uid://ofwngflr2pv8" path="res://movement_sensor.tscn" id="3_d5tbe"]
+[ext_resource type="PackedScene" uid="uid://dxgmo1u6mbjhn" path="res://simulation.tscn" id="3_lq665"]
+[ext_resource type="PackedScene" uid="uid://0y7w84i8m48p" path="res://lighting.tscn" id="4_3h1t8"]
+[ext_resource type="BoxMesh" uid="uid://c3hfnc6tgjept" path="res://Main.tres" id="4_b2bgo"]
+[ext_resource type="PackedScene" uid="uid://d32khhuok8616" path="res://player.tscn" id="5_ai7bk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ll6i"]
+albedo_color = Color(0.392157, 0.337255, 0.0470588, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a18fq"]
+material = SubResource("StandardMaterial3D_2ll6i")
+size = Vector2(10, 10)
+
+[node name="Main" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.171824, -0.00257874, 0.0623852)
+
+[node name="environment" type="Node3D" parent="."]
+
+[node name="wall" type="MeshInstance3D" parent="environment"]
+transform = Transform3D(1, 0, 0, 0, 2.02513, 0, 0, 0, 1, -5.70778, 0.218048, 2.08667)
+mesh = ExtResource("4_b2bgo")
+
+[node name="wall2" type="MeshInstance3D" parent="environment"]
+transform = Transform3D(1, 0, 0, 0, 2.02513, 0, 0, 0, 1, -6.88869, 0.218048, 5.41919)
+mesh = ExtResource("4_b2bgo")
+
+[node name="ground" type="MeshInstance3D" parent="environment"]
+transform = Transform3D(3.16207, 0, 0, 0, 1, 0, 0, 0, 3.76243, 0, 0, 0)
+mesh = SubResource("PlaneMesh_a18fq")
+
+[node name="player" parent="." instance=ExtResource("5_ai7bk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0859, 0.454659, 2.53648)
+
+[node name="movementSensor" parent="." instance=ExtResource("3_d5tbe")]
+
+[node name="Simulation" parent="." instance=ExtResource("3_lq665")]
+
+[node name="lighting" parent="Simulation" instance=ExtResource("4_3h1t8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 3.99902)
