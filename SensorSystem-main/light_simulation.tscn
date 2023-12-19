@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://6j4bwnebh0jr"]
+
+[ext_resource type="Script" path="res://lightSimulation.gd" id="1_ltf7r"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pqwb3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tg4vo"]
+line_spacing = 10.0
+font_size = 60
+outline_size = 5
+shadow_size = 12
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vnbr7"]
+sky_top_color = Color(0.34902, 0.603922, 1, 1)
+sky_horizon_color = Color(0.647059, 0.654902, 0.0313726, 1)
+sky_curve = 0.0861523
+sun_angle_max = 56.67
+sun_curve = 0.0568394
+
+[sub_resource type="Sky" id="Sky_5cpgr"]
+sky_material = SubResource("ProceduralSkyMaterial_vnbr7")
+
+[sub_resource type="Environment" id="Environment_dnhxb"]
+background_mode = 2
+sky = SubResource("Sky_5cpgr")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_17gpo"]
+
+[node name="lightSimulation" type="Node3D"]
+script = ExtResource("1_ltf7r")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0848883, 2.73773)
+fov = 100.4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_pqwb3")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 369.0
+offset_bottom = 41.0
+
+[node name="slider" type="HSlider" parent="Control"]
+layout_mode = 0
+offset_right = 269.0
+offset_bottom = 21.0
+min_value = 1.0
+max_value = 500.0
+value = 1.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+offset_left = 35.0
+offset_top = 70.0
+offset_right = 298.0
+offset_bottom = 149.0
+text = "0:0:0"
+label_settings = SubResource("LabelSettings_tg4vo")
+
+[node name="light" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.729971, 0.683478, 0, -0.683478, 0.729971, 0, 0, 0)
+light_temperature = 5500.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dnhxb")
+camera_attributes = SubResource("CameraAttributesPractical_17gpo")
