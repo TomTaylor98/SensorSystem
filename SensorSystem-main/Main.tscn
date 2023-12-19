@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cc1h5qrapbxuv"]
+[gd_scene load_steps=7 format=3 uid="uid://cc1h5qrapbxuv"]
 
-[ext_resource type="PackedScene" uid="uid://ofwngflr2pv8" path="res://movement_sensor.tscn" id="3_d5tbe"]
+[ext_resource type="PackedScene" uid="uid://dtnqds8g355nb" path="res://wall.tscn" id="1_kkdt1"]
 [ext_resource type="PackedScene" uid="uid://dxgmo1u6mbjhn" path="res://simulation.tscn" id="3_lq665"]
 [ext_resource type="PackedScene" uid="uid://0y7w84i8m48p" path="res://lighting.tscn" id="4_3h1t8"]
-[ext_resource type="BoxMesh" uid="uid://c3hfnc6tgjept" path="res://Main.tres" id="4_b2bgo"]
 [ext_resource type="PackedScene" uid="uid://d32khhuok8616" path="res://player.tscn" id="5_ai7bk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ll6i"]
@@ -18,13 +17,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.171824, -0.00257874, 0.062
 
 [node name="environment" type="Node3D" parent="."]
 
-[node name="wall" type="MeshInstance3D" parent="environment"]
-transform = Transform3D(1, 0, 0, 0, 2.02513, 0, 0, 0, 1, -5.70778, 0.218048, 2.08667)
-mesh = ExtResource("4_b2bgo")
+[node name="wall" parent="environment" instance=ExtResource("1_kkdt1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.45172, 0.5, 1.89941)
 
-[node name="wall2" type="MeshInstance3D" parent="environment"]
-transform = Transform3D(1, 0, 0, 0, 2.02513, 0, 0, 0, 1, -6.88869, 0.218048, 5.41919)
-mesh = ExtResource("4_b2bgo")
+[node name="wall2" parent="environment" instance=ExtResource("1_kkdt1")]
+transform = Transform3D(1, 0, 0, 0, 1.5, 0, 0, 0, 5.974, -8.08604, 0.834043, 2.99854)
 
 [node name="ground" type="MeshInstance3D" parent="environment"]
 transform = Transform3D(3.16207, 0, 0, 0, 1, 0, 0, 0, 3.76243, 0, 0, 0)
@@ -32,8 +29,6 @@ mesh = SubResource("PlaneMesh_a18fq")
 
 [node name="player" parent="." instance=ExtResource("5_ai7bk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0859, 0.454659, 2.53648)
-
-[node name="movementSensor" parent="." instance=ExtResource("3_d5tbe")]
 
 [node name="Simulation" parent="." instance=ExtResource("3_lq665")]
 

@@ -1,5 +1,28 @@
-[gd_scene format=3 uid="uid://ofwngflr2pv8"]
+[gd_scene load_steps=3 format=3 uid="uid://ofwngflr2pv8"]
+
+[ext_resource type="Script" path="res://movement_sensor.gd" id="1_uuuff"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7xgox"]
+radius = 4.238
 
 [node name="movementSensor" type="Node3D"]
+script = ExtResource("1_uuuff")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+
+[node name="sensor" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="sensor"]
+shape = SubResource("SphereShape3D_7xgox")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(1, 1, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="area_entered" from="sensor" to="." method="_on_sensor_area_entered"]
+[connection signal="area_exited" from="sensor" to="." method="_on_sensor_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

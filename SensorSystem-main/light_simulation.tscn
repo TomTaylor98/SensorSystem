@@ -1,8 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://6j4bwnebh0jr"]
+[gd_scene load_steps=7 format=3 uid="uid://cnsq8u3wma8vc"]
 
 [ext_resource type="Script" path="res://lightSimulation.gd" id="1_ltf7r"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_pqwb3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tg4vo"]
 line_spacing = 10.0
@@ -29,13 +27,6 @@ sky = SubResource("Sky_5cpgr")
 [node name="lightSimulation" type="Node3D"]
 script = ExtResource("1_ltf7r")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0848883, 2.73773)
-fov = 100.4
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_pqwb3")
-
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -54,10 +45,10 @@ value = 1.0
 
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 1
-offset_left = 35.0
-offset_top = 70.0
-offset_right = 298.0
-offset_bottom = 149.0
+offset_left = 9.0
+offset_top = 54.0
+offset_right = 272.0
+offset_bottom = 147.0
 text = "0:0:0"
 label_settings = SubResource("LabelSettings_tg4vo")
 

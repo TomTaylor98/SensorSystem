@@ -1,0 +1,108 @@
+[gd_scene load_steps=4 format=3 uid="uid://lwtk3t2ltsn7"]
+
+[ext_resource type="Script" path="res://Control.gd" id="1_yrcwn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_n85sd"]
+font_size = 60
+font_color = Color(0.698039, 0.972549, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_y2pn2"]
+line_spacing = 5.0
+font_size = 32
+font_color = Color(1, 1, 0.196078, 1)
+
+[node name="Server" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yrcwn")
+
+[node name="intenstiy" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = 166.0
+offset_right = 133.0
+offset_bottom = 253.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0 lux"
+label_settings = SubResource("LabelSettings_n85sd")
+horizontal_alignment = 1
+
+[node name="connect" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.0
+offset_top = -110.0
+offset_right = 105.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_hover_color = Color(0.87451, 0.717647, 0, 1)
+text = "CONNECT"
+
+[node name="ip_edit" type="TextEdit" parent="connect"]
+layout_mode = 0
+offset_left = 231.0
+offset_top = 16.0
+offset_right = 350.0
+offset_bottom = 44.0
+placeholder_text = "LOCALHOST"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = 100.0
+offset_right = 110.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.764706, 0.666667, 0, 1)
+text = "LIGHT: OFF"
+label_settings = SubResource("LabelSettings_y2pn2")
+horizontal_alignment = 1
+
+[node name="set" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -18.0
+offset_right = 107.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_hover_color = Color(0.87451, 0.717647, 0, 1)
+text = "SET"
+
+[node name="b_edit" type="TextEdit" parent="set"]
+layout_mode = 0
+offset_left = 231.0
+offset_top = 16.0
+offset_right = 353.0
+offset_bottom = 44.0
+placeholder_text = "Border value"
+
+[connection signal="pressed" from="connect" to="." method="_on_connect_pressed"]
+[connection signal="pressed" from="set" to="." method="_on_set_pressed"]

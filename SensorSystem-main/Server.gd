@@ -8,23 +8,31 @@ extends Node
 var server := UDPServer.new()
 var peers = []
 
-@onready var sim = get_tree().root.get_node("Simulation")
+var connected = false
+
+@onready var sensor = get_parent()
 
 func _ready():
 	server.listen(4242)
 
-func _process(delta):
-	server.poll() # Important!
+func send_sensor_data(peer):
+	peer.put_packet(sensor.get_data().to_byte_array())
+	#print(PackedByteArray([str(sensor.get_data())]))
+	
+	
+	
+
+func _physics_process(delta):
+	server.poll() 
 	if server.is_connection_available():
 		var peer: PacketPeerUDP = server.take_connection()
 		var packet = peer.get_packet()
 		print("Accepted peer: %s:%s" % [peer.get_packet_ip(), peer.get_packet_port()])
-		print("Received data: %s" % [packet.get_string_from_utf8()])
-		# Reply so it knows we received the message.
-		peer.put_packet(packet)
-		# Keep a reference so we can keep contacting the remote peer.
+		print("Received data: %s" % str(packet.to_int64_array()))
 		peers.append(peer)
 
-#	if peers.size()>0:
-#		for peer in peers:
-#			peer.put_packet(str(sim.).to_utf8_buffer())
+		
+		
+	if peers.size()>0:
+		for peer in peers:
+			send_sensor_data(peer)

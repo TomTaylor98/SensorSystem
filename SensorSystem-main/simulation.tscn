@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxgmo1u6mbjhn"]
+[gd_scene load_steps=7 format=3 uid="uid://dxgmo1u6mbjhn"]
 
-[ext_resource type="Script" path="res://Simulation.gd" id="1_i7p4o"]
+[ext_resource type="Script" path="res://lightSimulation.gd" id="1_q2kh7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1a8ai"]
 sky_top_color = Color(0.458824, 0.329412, 0.854902, 1)
@@ -23,27 +23,50 @@ ssao_radius = 0.01
 ssao_intensity = 0.0
 ssao_power = 4.09813
 ssil_radius = 7.86
+volumetric_fog_density = 0.9763
+volumetric_fog_detail_spread = 6.0
+volumetric_fog_sky_affect = 0.5
 
 [sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_kx1y5"]
 auto_exposure_enabled = true
 
+[sub_resource type="LabelSettings" id="LabelSettings_egxcj"]
+line_spacing = 10.0
+font_size = 60
+outline_size = 5
+shadow_size = 12
+
 [node name="Simulation" type="Node3D"]
-script = ExtResource("1_i7p4o")
+script = ExtResource("1_q2kh7")
 
 [node name="light" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.634798, 0.772678, 0, -0.772678, 0.634798, 0, 3.33755, 18.6238)
 light_intensity_lux = 35714.3
 
-[node name="light_slider" type="HSlider" parent="."]
-offset_left = 826.0
-offset_top = 3.0
-offset_right = 1146.0
-offset_bottom = 92.0
-max_value = 1.0
-step = 0.001
-
 [node name="world" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_7m7b2")
 camera_attributes = SubResource("CameraAttributesPhysical_kx1y5")
 
-[connection signal="value_changed" from="light_slider" to="." method="_on_light_slider_value_changed"]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1149.0
+offset_bottom = 652.0
+
+[node name="slider" type="HSlider" parent="Control"]
+offset_left = 20.0
+offset_top = 38.0
+offset_right = 340.0
+offset_bottom = 127.0
+max_value = 200.0
+value = 1.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 132.0
+offset_right = 289.0
+offset_bottom = 224.0
+label_settings = SubResource("LabelSettings_egxcj")
+
+[connection signal="value_changed" from="Control/slider" to="." method="_on_light_slider_value_changed"]

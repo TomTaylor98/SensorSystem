@@ -2,7 +2,7 @@ extends Node3D
 
 #because the performance of light bulbs is usually predefined
 var W = 100 #the power of the light bulb, in 
-var R = 0.01
+var R = 20
 var V 
 var is_current_flowing:bool = false
 
@@ -28,7 +28,6 @@ func _physics_process(delta):
 
 func on_current(v):
 	V = v
-	print("curr")
 	is_current_flowing = true
 	
 	

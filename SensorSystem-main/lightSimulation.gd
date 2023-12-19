@@ -21,7 +21,7 @@ var prev_time
 
 var is_afternoon:bool = false
 
-@onready var env = $WorldEnvironment.environment
+@onready var env = $world.environment
 @onready var slider = $Control.get_node("slider")
 @onready var label = $Control.get_node("Label")
 @onready var li = $light
@@ -35,10 +35,12 @@ func set_time(seconds_passed,time_rate):
 	var prev_min = time["minutes"]
 	
 	time["seconds"] = wrap(time["seconds"]+seconds_passed*time_rate,0.0,60.0)
+	
 	if prev_sec>=time["seconds"]:
 		time["minutes"] = wrap(time["minutes"]+1,0,60)
+		
 	if prev_min>=time["minutes"] and prev_min!=time["minutes"]: 
-		time["hours"] += 1 
+		time["hours"] =  wrap(time["hours"]+1,0,24)
 	
 func get_time(unit:String):
 	return time[unit]
@@ -71,7 +73,7 @@ func _physics_process(delta):
 	if  get_time("hours")>=min_2 and get_time("hours")<max_2:
 		if prev_min!=get_time("minutes"):
 			inc_2 += float(1.0/360)
-			print(pow(10,lerp(3,5,inc_2)))
+			#print(pow(10,lerp(3,5,inc_2)))
 			li.light_intensity_lux = pow(10,lerp(3,5,inc_2))
 			env.background_intensity = pow(10,lerp(3,5,inc_2))
 	
@@ -79,14 +81,14 @@ func _physics_process(delta):
 		#if a minute passes calculate the luminosity of light 
 		if prev_min!=get_time("minutes"):
 			dec_2 -= float(1.0/120.0)
-			print(pow(10,lerp(-3,3,dec_2)))
+			#print(pow(10,lerp(-3,3,dec_2)))
 			li.light_intensity_lux = pow(10,lerp(-3,3,dec_2))
 			env.background_intensity = pow(10,lerp(-3,3,dec_2))
 	
 	if  get_time("hours")>=12 and get_time("hours")<18:
 		if prev_min!=get_time("minutes"):
 			dec_1 -= float(1.0/360)
-			print(pow(10,lerp(3,5,dec_1)))
+			#print(pow(10,lerp(3,5,dec_1)))
 			li.light_intensity_lux = pow(10,lerp(3,5,dec_1))
 			env.background_intensity = pow(10,lerp(3,5,dec_1))
 	

@@ -5,8 +5,10 @@ extends Node3D
 
 var voltage = 230 #the voltage of the power source in volts
 
-var is_light_low = false
-var is_motion_detected = true
+var is_current_blocked = false
+
+var mo_block = true
+var li_block = true
 
 signal current(voltage)
 
@@ -15,9 +17,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	is_current_blocked = false
 	
-	
-	if is_light_low and is_motion_detected:
+	if mo_block or li_block:
+		is_current_blocked = true
+		
+	if !is_current_blocked:
 		set_block_signals(false)
 	else:
 		set_block_signals(true)
@@ -28,11 +33,16 @@ func _physics_process(delta):
 	
 
 func on_low_light():
-	is_light_low = true
+	li_block = false
+	
 	
 func on_high_light():
-	is_light_low = false
+	li_block = true
 	
 func on_motion_detected():
-	is_motion_detected = true
+	#is_current_blocked= false
+	mo_block = false
+
+func on_timeout_for_motion_sensor():
+	mo_block = true
 	
